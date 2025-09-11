@@ -1,4 +1,3 @@
-import Constants from "expo-constants";
 import { StyleSheet, View } from "react-native";
 import RepositoryList from "./RepositoryList";
 import Text from "./Text";
@@ -9,7 +8,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
   },
-});
+}); // Make sure this closing parenthesis and semicolon are present
 
 const Main = () => {
   return (
@@ -17,7 +16,6 @@ const Main = () => {
       <AppBarTab />
 
       <View style={styles.container}>
-        <Text>Rate Repository </Text>
         <RepositoryList />
       </View>
     </>

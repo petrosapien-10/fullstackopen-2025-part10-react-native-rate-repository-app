@@ -4,6 +4,7 @@ const theme = {
     textSecondary: "#ff0000", // Change to red for testing
     primary: "#0366d6",
     appBarTab: "#24292e",
+    separator: "#e1e4e8",
   },
   fontSizes: {
     body: 14,
