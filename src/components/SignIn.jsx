@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 12,
     backgroundColor: theme.colors.mainBackGround,
+    fontFamily: theme.fonts.main,
   },
   button: {
     borderRadius: 4,
@@ -29,9 +30,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontWeight: theme.fontWeights.bold,
+    fontFamily: theme.fonts.main,
   },
   error: {
     color: "#d73a4a",
+    fontFamily: theme.fonts.main,
   },
 });
 

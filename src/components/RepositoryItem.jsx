@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   boldText: {
     fontWeight: theme.fontWeights.bold,
     fontSize: theme.fontSizes.subheading,
+    fontFamily: theme.fonts.main,
   },
 
   headerContainer: {
@@ -49,6 +50,21 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginLeft: 8,
   },
+
+  regularText: {
+    fontFamily: theme.fonts.main,
+    color: theme.colors.textPrimary,
+  },
+
+  languageText: {
+    color: "white",
+    fontWeight: theme.fontWeights.bold,
+    fontFamily: theme.fonts.main,
+  },
+
+  statLabel: {
+    fontFamily: theme.fonts.main,
+  },
 });
 
 const RepositoryItem = ({ repository }) => {
@@ -61,11 +77,9 @@ const RepositoryItem = ({ repository }) => {
         />
         <View style={styles.headerTextContainer}>
           <Text style={styles.boldText}>{repository.fullName}</Text>
-          <Text>{repository.description}</Text>
+          <Text style={styles.regularText}>{repository.description}</Text>
           <View style={styles.languageTag}>
-            <Text style={{ color: "white", fontWeight: "bold" }}>
-              {repository.language}
-            </Text>
+            <Text style={styles.languageText}>{repository.language}</Text>
           </View>
         </View>
       </View>
@@ -73,22 +87,22 @@ const RepositoryItem = ({ repository }) => {
       <View style={styles.statsContainer}>
         <View style={styles.statItem}>
           <Text style={styles.boldText}>{repository.stargazersCount}</Text>
-          <Text>Stars</Text>
+          <Text style={styles.statLabel}>Stars</Text>
         </View>
 
         <View style={styles.statItem}>
           <Text style={styles.boldText}>{repository.forksCount}</Text>
-          <Text>Forks</Text>
+          <Text style={styles.statLabel}>Forks</Text>
         </View>
 
         <View style={styles.statItem}>
           <Text style={styles.boldText}>{repository.reviewCount}</Text>
-          <Text>Reviews</Text>
+          <Text style={styles.statLabel}>Reviews</Text>
         </View>
 
         <View style={styles.statItem}>
           <Text style={styles.boldText}>{repository.ratingAverage}</Text>
-          <Text>Rating</Text>
+          <Text style={styles.statLabel}>Rating</Text>
         </View>
       </View>
     </View>
