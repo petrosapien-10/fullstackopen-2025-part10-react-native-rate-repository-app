@@ -4,6 +4,7 @@ import theme from "../theme";
 import * as yup from "yup";
 
 import useSignIn from "../hooks/useSignIn";
+import AuthStorage from "../utils/authStorage";
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -106,7 +107,13 @@ const SignIn = () => {
 
     try {
       const { data } = await signIn({ username, password });
-      console.log("data: ", data);
+
+      const auth = new AuthStorage();
+      await auth.setAccessToken(data.authenticate.accessToken);
+
+      const token = await auth.getAccessToken();
+
+      console.log("token: ", token);
     } catch (error) {
       console.log(error);
     }
