@@ -4,7 +4,7 @@ import theme from "../theme";
 import * as yup from "yup";
 
 import useSignIn from "../hooks/useSignIn";
-import AuthStorage from "../utils/authStorage";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -98,6 +98,7 @@ const SignInForm = ({ onSubmit }) => {
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     console.log("username: ", values.username);
@@ -108,11 +109,11 @@ const SignIn = () => {
     try {
       const { data } = await signIn({ username, password });
 
-      const auth = new AuthStorage();
-      await auth.setAccessToken(data.authenticate.accessToken);
-
-      const token = await auth.getAccessToken();
-
+      if (data?.authenticate?.accessToken) {
+        navigate("/");
+      }
+      console.log("data: ", data);
+      const token = await authStorage.getAccessToken();
       console.log("token: ", token);
     } catch (error) {
       console.log(error);
