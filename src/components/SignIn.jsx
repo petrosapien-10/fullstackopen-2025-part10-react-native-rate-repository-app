@@ -51,7 +51,7 @@ const validationSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
-const SignInForm = ({ onSubmit }) => {
+export const SignInForm = ({ onSubmit }) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -61,6 +61,7 @@ const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.formContainer}>
       <TextInput
+        testID="usernameField"
         placeholder="Username"
         value={formik.values.username}
         onChangeText={formik.handleChange("username")}
@@ -75,6 +76,7 @@ const SignInForm = ({ onSubmit }) => {
         <Text style={styles.error}>{formik.errors.username}</Text>
       )}
       <TextInput
+        testID="passwordField"
         placeholder="Password"
         value={formik.values.password}
         onChangeText={formik.handleChange("password")}
@@ -89,7 +91,11 @@ const SignInForm = ({ onSubmit }) => {
       {formik.touched.password && formik.errors.password && (
         <Text style={styles.error}>{formik.errors.password}</Text>
       )}
-      <Pressable onPress={formik.handleSubmit} style={styles.button}>
+      <Pressable
+        testID="submitButton"
+        onPress={formik.handleSubmit}
+        style={styles.button}
+      >
         <Text style={styles.buttonText}>Sign in</Text>
       </Pressable>
     </View>
@@ -101,20 +107,13 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
-    console.log("username: ", values.username);
-    console.log("password: ", values.password);
-
     const { username, password } = values;
 
     try {
       const { data } = await signIn({ username, password });
-
       if (data?.authenticate?.accessToken) {
         navigate("/");
       }
-      console.log("data: ", data);
-      const token = await authStorage.getAccessToken();
-      console.log("token: ", token);
     } catch (error) {
       console.log(error);
     }

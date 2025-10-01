@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import react from "eslint-plugin-react";
 import reactNative from "eslint-plugin-react-native";
+import jest from "eslint-plugin-jest";
 
 export default [
   js.configs.recommended,
@@ -9,6 +10,7 @@ export default [
     plugins: {
       react,
       "react-native": reactNative,
+      jest,
     },
     languageOptions: {
       ecmaVersion: "latest",
@@ -34,6 +36,7 @@ export default [
     rules: {
       ...react.configs.recommended.rules,
       ...reactNative.configs.all.rules,
+      ...jest.configs.recommended.rules,
       "react/prop-types": "off",
       "react-native/no-unused-styles": "error",
       "react-native/split-platform-components": "error",
