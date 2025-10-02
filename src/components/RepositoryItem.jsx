@@ -1,4 +1,11 @@
-import { Text, View, StyleSheet, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Linking,
+  Pressable,
+} from "react-native";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
@@ -65,9 +72,29 @@ const styles = StyleSheet.create({
   statLabel: {
     fontFamily: theme.fonts.main,
   },
+
+  githubButton: {
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    margin: 16,
+    borderRadius: 6,
+    alignItems: "center",
+  },
+
+  githubButtonText: {
+    color: "white",
+    fontWeight: theme.fontWeights.bold,
+    fontFamily: theme.fonts.main,
+    fontSize: theme.fontSizes.subheading,
+  },
 });
 
-const RepositoryItem = ({ repository }) => {
+const RepositoryItem = ({ repository, showGitHubButton = false }) => {
+  const handleOpenInGitHub = () => {
+    Linking.openURL(repository.url);
+  };
+
   return (
     <View style={styles.container} testID="repositoryItem">
       <View style={styles.headerContainer}>
@@ -105,6 +132,12 @@ const RepositoryItem = ({ repository }) => {
           <Text style={styles.statLabel}>Rating</Text>
         </View>
       </View>
+
+      {showGitHubButton && (
+        <Pressable style={styles.githubButton} onPress={handleOpenInGitHub}>
+          <Text style={styles.githubButtonText}>Open in GitHub</Text>
+        </Pressable>
+      )}
     </View>
   );
 };
